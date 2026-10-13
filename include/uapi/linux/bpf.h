@@ -27,6 +27,9 @@
 #define BPF_MOV		0xb0	/* mov reg to reg */
 #define BPF_ARSH	0xc0	/* sign extending arithmetic shift right */
 
+/* NOP */
+#define BPF_NOP	0xe0
+
 /* change endianness of a register */
 #define BPF_END		0xd0	/* flags for endianness conversion: */
 #define BPF_TO_LE	0x00	/* convert to little-endian */
