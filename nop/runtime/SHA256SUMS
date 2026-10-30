@@ -1,0 +1,5 @@
+fc6e04f578ba442830621bfc35a8025ae37fc0129217b4e49a12ead81024a365  build-jit/.config
+fdc2e2ad5816d20d4e7345d71c31f4230c42d11b274ccc91e67988b7ccb8db7c  build-jit/arch/x86/boot/bzImage
+2d0133b1741b28c2fc72eea65f6b5a075036fd8604c8a6be5d5c2ec8a6486e1c  build/guest.cpio.gz
+151d0a2054af4d0b88ba8c5b277fdc9d2cb48da68423054b23818a83611a4f01  nop/runtime/test
+ff297472ad6a62ac338d5e51a994171e5b4befbdcfef5034a92a2e63fc7c3585  nop/runtime/check

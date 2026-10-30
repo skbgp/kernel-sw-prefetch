@@ -1,0 +1,15 @@
+#!/bin/sh
+mount -t devtmpfs devtmpfs /dev
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t 9p -o trans=virtio,version=9p2000.L,ro tests /shared || exec sh
+printf 'GUEST_KERNEL='
+uname -r
+printf 'Saved build configuration from the shared folder:\n'
+grep -E 'CONFIG_(BPF_SYSCALL|BPF_JIT|IKCONFIG|XDP_BATCHING|TEST_BPF)' /shared/config
+if grep -q 'nop.auto=1' /proc/cmdline; then
+    /shared/run.sh
+    poweroff -f
+fi
+printf 'Run /shared/test. Exit with poweroff -f.\n'
+exec setsid cttyhack sh

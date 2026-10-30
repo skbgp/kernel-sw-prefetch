@@ -1,0 +1,5 @@
+7b436af29bee4b46149ff5cc1eaac73e537c1189d8419cebc52377e53de5472c  nop/test
+b2d74498fcad84258f75859a3b3f3f0e64bffbb78c6cb9f61f16a6dae4002a0c  nop/check
+b1fe3183eb8e9aa6f8ff34f18fe38e572055bef6f4f542cd8a152454db3d8d48  nop/jit/check
+ce5cca9464d3f78baa7353cbf8a1792d691de985396d348b55c6a6016476355d  build-minimal/arch/x86/boot/bzImage
+fdc2e2ad5816d20d4e7345d71c31f4230c42d11b274ccc91e67988b7ccb8db7c  build-jit/arch/x86/boot/bzImage

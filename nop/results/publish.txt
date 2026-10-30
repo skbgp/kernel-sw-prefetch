@@ -1,0 +1,46 @@
+Publication commands (CloudLab, then Mac)
+
+CloudLab:
+cd ~/kernel-sw-prefetch
+git diff --check
+git add kernel/bpf/core.c kernel/bpf/verifier.c kernel/bpf/disasm.c nop
+git commit -m "bpf: execute NOP in the interpreter"
+
+Before pushing, the staged-file audit found that the kernel ignore rules
+also ignored the intended .patch and .gz evidence files. They were added
+explicitly and the still-unpublished commit was amended:
+printf "nop.patch -whitespace\n" > nop/.gitattributes
+git add nop/.gitattributes
+git add -f nop/nop.patch nop/results/*.log.gz
+git diff --cached --check
+git commit --amend --no-edit
+git bundle create ~/nop.bundle origin/nop-verifier..HEAD
+
+Mac:
+scp cloudlab:nop.bundle /private/tmp/nop-20261025/nop.bundle
+git --git-dir=/private/tmp/nop-20261025/publish.git fetch /private/tmp/nop-20261025/nop.bundle HEAD:refs/heads/nop-verifier
+git --git-dir=/private/tmp/nop-20261025/publish.git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push origin refs/heads/nop-verifier:refs/heads/nop-verifier
+
+Verification:
+gh api repos/skbgp/kernel-sw-prefetch/branches/nop-verifier --jq .commit.sha
+ssh cloudlab 'cd ~/kernel-sw-prefetch; git fetch origin nop-verifier; git status --short --branch; git log -1 --oneline'
+
+The staging repository was created on the Mac with git init --bare. It used
+an objects/info/alternates reference to the existing local kernel checkout,
+a base ref at 680b721a3232f6d689a67c1ca37c6cf35fe1df6e, and a fetch of the
+fork's existing nop-verifier branch. This reused local kernel objects rather
+than transferring another full Linux clone. It did not modify that checkout.
+
+No force push. No GitHub token copied to CloudLab. No JIT implementation.
+The commit containing this file is the publication identifier; use git log -1.
+
+The README diff block was also displayed with expanded tabs to avoid
+whitespace-check warnings from embedded patch context. The standalone patch
+retains its exact bytes. Notes were finalized with git add and an unpublished
+git commit --amend --no-edit before regenerating the bundle and pushing.
+
+The first bundle import requested refs/heads/nop-verifier, but the bundle
+created from origin/nop-verifier..HEAD exports HEAD. That import failed, and
+the following push had no local branch to push. Nothing was published by
+that attempt. git bundle verify showed the exported ref; importing HEAD
+into refs/heads/nop-verifier fixes the command above.

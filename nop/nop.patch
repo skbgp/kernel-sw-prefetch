@@ -1,0 +1,81 @@
+diff --git a/include/uapi/linux/bpf.h b/include/uapi/linux/bpf.h
+index 47f201bf7..f923fab27 100644
+--- a/include/uapi/linux/bpf.h
++++ b/include/uapi/linux/bpf.h
+@@ -27,6 +27,9 @@
+ #define BPF_MOV		0xb0	/* mov reg to reg */
+ #define BPF_ARSH	0xc0	/* sign extending arithmetic shift right */
+ 
++/* NOP */
++#define BPF_NOP	0xe0
++
+ /* change endianness of a register */
+ #define BPF_END		0xd0	/* flags for endianness conversion: */
+ #define BPF_TO_LE	0x00	/* convert to little-endian */
+diff --git a/kernel/bpf/core.c b/kernel/bpf/core.c
+index ba6b6118c..198179ca5 100644
+--- a/kernel/bpf/core.c
++++ b/kernel/bpf/core.c
+@@ -1607,6 +1607,7 @@ EXPORT_SYMBOL_GPL(__bpf_call_base);
+ 	INSN_3(ALU64, ARSH, K),			\
+ 	INSN_3(ALU64, DIV,  K),			\
+ 	INSN_3(ALU64, MOD,  K),			\
++	INSN_3(ALU64, NOP,  K),			\
+ 	/* Call instruction. */			\
+ 	INSN_2(JMP, CALL),			\
+ 	/* Exit instruction. */			\
+@@ -1843,6 +1844,8 @@ static u64 ___bpf_prog_run(u64 *regs, const struct bpf_insn *insn)
+ 	ALU64_MOV_K:
+ 		DST = IMM;
+ 		CONT;
++	ALU64_NOP_K:
++		CONT;
+ 	LD_IMM_DW:
+ 		DST = (u64) (u32) insn[0].imm | ((u64) (u32) insn[1].imm) << 32;
+ 		insn++;
+diff --git a/kernel/bpf/disasm.c b/kernel/bpf/disasm.c
+index 20883c6b1..dd05f017b 100644
+--- a/kernel/bpf/disasm.c
++++ b/kernel/bpf/disasm.c
+@@ -191,7 +191,9 @@ void print_bpf_insn(const struct bpf_insn_cbs *cbs,
+ 	u8 class = BPF_CLASS(insn->code);
+ 
+ 	if (class == BPF_ALU || class == BPF_ALU64) {
+-		if (BPF_OP(insn->code) == BPF_END) {
++		if (insn->code == (BPF_ALU64 | BPF_NOP | BPF_K)) {
++			verbose(cbs->private_data, "(%02x) nop\n", insn->code);
++		} else if (BPF_OP(insn->code) == BPF_END) {
+ 			if (class == BPF_ALU64)
+ 				print_bpf_bswap_insn(verbose, cbs->private_data, insn);
+ 			else
+diff --git a/kernel/bpf/verifier.c b/kernel/bpf/verifier.c
+index b3f87b0ec..7bde3d44c 100644
+--- a/kernel/bpf/verifier.c
++++ b/kernel/bpf/verifier.c
+@@ -15328,6 +15328,15 @@ static int check_alu_op(struct bpf_verifier_env *env, struct bpf_insn *insn)
+ 	u8 opcode = BPF_OP(insn->code);
+ 	int err;
+ 
++	if (opcode == BPF_NOP) {
++		if (insn->code != (BPF_ALU64 | BPF_NOP | BPF_K) ||
++		    insn->dst_reg || insn->src_reg || insn->off || insn->imm) {
++			verbose(env, "BPF_NOP uses reserved fields\n");
++			return -EINVAL;
++		}
++		return 0;
++	}
++
+ 	if (opcode == BPF_END || opcode == BPF_NEG) {
+ 		if (opcode == BPF_NEG) {
+ 			if (BPF_SRC(insn->code) != BPF_K ||
+@@ -23769,6 +23778,10 @@ static void compute_insn_live_regs(struct bpf_verifier_env *env,
+ 	case BPF_ALU:
+ 	case BPF_ALU64:
+ 		switch (code) {
++		case BPF_NOP:
++			use = 0;
++			def = 0;
++			break;
+ 		case BPF_END:
+ 			use = dst;
+ 			def = dst;

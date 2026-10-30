@@ -1,0 +1,5 @@
+/test
+/check
+/test_bpf.ko
+/results/*.log
+/expected

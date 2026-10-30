@@ -1,0 +1,5 @@
+b41593311fddebc87d885f1693ace6ad8fbe491f554fa0c19a5aff0b34ec0572  build-minimal/.config
+ce5cca9464d3f78baa7353cbf8a1792d691de985396d348b55c6a6016476355d  build-minimal/arch/x86/boot/bzImage
+906f1833b8bc3ba96d98930edc739d4a7852e11bea776faf817d58c3793de59c  build-minimal/guest.cpio.gz
+151d0a2054af4d0b88ba8c5b277fdc9d2cb48da68423054b23818a83611a4f01  nop/minimal/test
+ff297472ad6a62ac338d5e51a994171e5b4befbdcfef5034a92a2e63fc7c3585  nop/minimal/check
