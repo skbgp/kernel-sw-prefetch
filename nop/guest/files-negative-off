@@ -1,0 +1,12 @@
+dir /bin 0755 0 0
+dir /dev 0755 0 0
+dir /proc 0755 0 0
+dir /sys 0755 0 0
+dir /tmp 1777 0 0
+nod /dev/console 0600 0 0 c 5 1
+nod /dev/null 0666 0 0 c 1 3
+file /bin/busybox /users/cs25m046/guest-original/busybox 0755 0 0
+slink /bin/sh busybox 0777 0 0
+file /init /users/cs25m046/guest-original/init 0755 0 0
+file /test /users/cs25m046/guest-original/test 0755 0 0
+file /bad-negative-off /users/cs25m046/guest-original/bad-negative-off 0755 0 0

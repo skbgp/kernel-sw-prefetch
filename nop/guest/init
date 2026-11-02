@@ -1,0 +1,11 @@
+#!/bin/sh
+/bin/busybox mount -t devtmpfs devtmpfs /dev
+/bin/busybox mount -t proc proc /proc
+/bin/busybox mount -t sysfs sysfs /sys
+/bin/busybox --install -s /bin
+echo "Guest kernel: $(uname -r)"
+echo 'Run: uname -r'
+echo 'Then: /test'
+echo 'Then: echo $?'
+echo 'To shut down: poweroff -f'
+exec /bin/sh </dev/console >/dev/console 2>&1
