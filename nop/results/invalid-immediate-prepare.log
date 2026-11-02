@@ -1,0 +1,17 @@
+Only instruction change from test.c:
+--- nop/test.c	2026-11-02 00:09:56.501400835 -0600
++++ nop/bad.c	2026-11-02 01:10:19.092230328 -0600
+@@ -10,7 +10,7 @@
+ int main(void)
+ {
+     struct bpf_insn program[] = {
+-        { .code = NOP_CODE },
++        { .code = NOP_CODE, .imm = 1 },
+         { .code = BPF_ALU64 | BPF_MOV | BPF_K,
+           .dst_reg = BPF_REG_0, .imm = 7 },
+         { .code = BPF_JMP | BPF_EXIT },
+Command: gcc -static -Wall -Wextra -O2 nop/bad.c -o /users/cs25m046/guest-original/bad
+5dc6390d08dfb32119138e2ea48a398894403d895780f2fa16c134f9b3d6c474  nop/bad.c
+9159e5d701daa1a1281e25eab40efadd8a9ed668419f727b8a2fb8a8d1b71806  /users/cs25m046/guest-original/bad
+Original guest archive unchanged:
+ddc0d4dd894c97e5789fff54ef7052febfaf818fd526629552412950ceed17f9  /users/cs25m046/guest-original/initramfs.cpio.gz

@@ -1,0 +1,32 @@
+Command: git switch -c nop
+Switched to a new branch 'nop'
+Edit: include/uapi/linux/bpf.h; add the BPF_NOP definition before the endianness definitions.
+diff --git a/include/uapi/linux/bpf.h b/include/uapi/linux/bpf.h
+index 47f201bf7..77413a251 100644
+--- a/include/uapi/linux/bpf.h
++++ b/include/uapi/linux/bpf.h
+@@ -27,6 +27,9 @@
+ #define BPF_MOV		0xb0	/* mov reg to reg */
+ #define BPF_ARSH	0xc0	/* sign extending arithmetic shift right */
+ 
++/* NOP */
++#define BPF_NOP		0xe0
++
+ /* change endianness of a register */
+ #define BPF_END		0xd0	/* flags for endianness conversion: */
+ #define BPF_TO_LE	0x00	/* convert to little-endian */
+    26	/* alu/jmp fields */
+    27	#define BPF_MOV		0xb0	/* mov reg to reg */
+    28	#define BPF_ARSH	0xc0	/* sign extending arithmetic shift right */
+    29	
+    30	/* NOP */
+    31	#define BPF_NOP		0xe0
+    32	
+    33	/* change endianness of a register */
+    34	#define BPF_END		0xd0	/* flags for endianness conversion: */
+    35	#define BPF_TO_LE	0x00	/* convert to little-endian */
+    36	#define BPF_TO_BE	0x08	/* convert to big-endian */
+    37	#define BPF_FROM_LE	BPF_TO_LE
+## nop
+ M include/uapi/linux/bpf.h
+?? nop/

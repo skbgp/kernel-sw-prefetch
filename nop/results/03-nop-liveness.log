@@ -1,0 +1,4 @@
+Edit: kernel/bpf/verifier.c; add empty register use and definition sets for NOP.
+Traceback (most recent call last):
+  File "<stdin>", line 5, in <module>
+ValueError: substring not found

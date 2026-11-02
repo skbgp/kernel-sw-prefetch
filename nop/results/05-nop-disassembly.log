@@ -1,0 +1,31 @@
+Edit: kernel/bpf/disasm.c; print the exact E7 encoding as nop.
+diff --git a/kernel/bpf/disasm.c b/kernel/bpf/disasm.c
+index 20883c6b1..dd05f017b 100644
+--- a/kernel/bpf/disasm.c
++++ b/kernel/bpf/disasm.c
+@@ -191,7 +191,9 @@ void print_bpf_insn(const struct bpf_insn_cbs *cbs,
+ 	u8 class = BPF_CLASS(insn->code);
+ 
+ 	if (class == BPF_ALU || class == BPF_ALU64) {
+-		if (BPF_OP(insn->code) == BPF_END) {
++		if (insn->code == (BPF_ALU64 | BPF_NOP | BPF_K)) {
++			verbose(cbs->private_data, "(%02x) nop\n", insn->code);
++		} else if (BPF_OP(insn->code) == BPF_END) {
+ 			if (class == BPF_ALU64)
+ 				print_bpf_bswap_insn(verbose, cbs->private_data, insn);
+ 			else
+   190		const bpf_insn_print_t verbose = cbs->cb_print;
+   191		u8 class = BPF_CLASS(insn->code);
+   192	
+   193		if (class == BPF_ALU || class == BPF_ALU64) {
+   194			if (insn->code == (BPF_ALU64 | BPF_NOP | BPF_K)) {
+   195				verbose(cbs->private_data, "(%02x) nop\n", insn->code);
+   196			} else if (BPF_OP(insn->code) == BPF_END) {
+   197				if (class == BPF_ALU64)
+   198					print_bpf_bswap_insn(verbose, cbs->private_data, insn);
+   199				else
+   200					print_bpf_end_insn(verbose, cbs->private_data, insn);
+   201			} else if (BPF_OP(insn->code) == BPF_NEG) {
+## nop
+ M kernel/bpf/disasm.c
+?? nop/

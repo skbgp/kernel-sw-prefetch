@@ -1,0 +1,11 @@
+Original-kernel regression artifacts:
+7746f8512c02a78adaa320c334fb4995de8f2b91dca9947f8ddba201441ce6f8  ../kernel-original/build/arch/x86/boot/bzImage
+f30cd75d5466361396d753c6b23bd288dea24a3e158b7acd61a8bd12c43b6795  ../kernel-original/build/lib/test_bpf.ko
+189eef6da1b73802a334136763c960a24236a2f5a806c91fb647bdf467b70149  /users/cs25m046/guest-original/initramfs-regression-original.cpio.gz
+Commands to run inside the guest:
+uname -r
+insmod /test_bpf.ko
+echo $?
+dmesg
+rmmod test_bpf
+echo $?

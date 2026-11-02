@@ -1,0 +1,48 @@
+diff --git a/kernel/bpf/core.c b/kernel/bpf/core.c
+index ba6b6118c..198179ca5 100644
+--- a/kernel/bpf/core.c
++++ b/kernel/bpf/core.c
+@@ -1607,6 +1607,7 @@ EXPORT_SYMBOL_GPL(__bpf_call_base);
+ 	INSN_3(ALU64, ARSH, K),			\
+ 	INSN_3(ALU64, DIV,  K),			\
+ 	INSN_3(ALU64, MOD,  K),			\
++	INSN_3(ALU64, NOP,  K),			\
+ 	/* Call instruction. */			\
+ 	INSN_2(JMP, CALL),			\
+ 	/* Exit instruction. */			\
+@@ -1843,6 +1844,8 @@ static u64 ___bpf_prog_run(u64 *regs, const struct bpf_insn *insn)
+ 	ALU64_MOV_K:
+ 		DST = IMM;
+ 		CONT;
++	ALU64_NOP_K:
++		CONT;
+ 	LD_IMM_DW:
+ 		DST = (u64) (u32) insn[0].imm | ((u64) (u32) insn[1].imm) << 32;
+ 		insn++;
+[nop 5a80b333f] Add NOP interpreter support
+ Committer: cs25m046 <cs25m046@node0.cs25m046-321505.heartbeat-pg0.wisc.cloudlab.us>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+)
+commit 5a80b333f3622a8f5c595964735b9a2df59f2db7
+Author:     cs25m046 <cs25m046@node0.cs25m046-321505.heartbeat-pg0.wisc.cloudlab.us>
+AuthorDate: Mon Nov 2 00:54:08 2026 -0600
+Commit:     cs25m046 <cs25m046@node0.cs25m046-321505.heartbeat-pg0.wisc.cloudlab.us>
+CommitDate: Mon Nov 2 00:54:08 2026 -0600
+
+    Add NOP interpreter support
+
+ kernel/bpf/core.c | 3 +++
+ 1 file changed, 3 insertions(+)
+## nop
+?? nop/

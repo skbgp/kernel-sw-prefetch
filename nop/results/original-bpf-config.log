@@ -1,0 +1,25 @@
+Command: scripts/config --file build/.config -e BPF_SYSCALL
+Command: make O=build olddefconfig
+make[1]: Entering directory '/users/cs25m046/kernel-original/build'
+  GEN     Makefile
+#
+# configuration written to .config
+#
+make[1]: Leaving directory '/users/cs25m046/kernel-original/build'
+Configuration differences from x86_64_defconfig:
+ BPF_SYSCALL n -> y
++BPF_EVENTS y
++BPF_PRELOAD n
++BPF_UNPRIV_DEFAULT_OFF y
++CGROUP_BPF n
++IO_URING_ZCRX y
++NETFILTER_BPF_LINK y
++NETKIT n
++NET_DEVMEM y
++NET_SOCK_MSG y
++PAGE_POOL y
++PAGE_POOL_STATS n
++XDP_SOCKETS n
+BPF_SYSCALL: y
+BPF_JIT: n
+XDP_BATCHING: n

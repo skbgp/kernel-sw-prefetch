@@ -1,0 +1,55 @@
+Mon Nov  2 15:07:47 UTC 2026
+Source commit: 680b721a3232f6d689a67c1ca37c6cf35fe1df6e
+a89f8accb2eeee457ddfce29fcd1a718113d48b57ba9f753fcb61ef1c39f9cb2  build/.config
+Command: make O=build -j24 bzImage modules
+make[1]: Entering directory '/users/cs25m046/kernel-original/build'
+  SYNC    include/config/auto.conf.cmd
+  GEN     Makefile
+  GEN     Makefile
+  DESCEND objtool
+  INSTALL libsubcmd_headers
+  CALL    ../scripts/checksyscalls.sh
+  LDS     scripts/module.lds
+  CC [M]  net/netfilter/nf_log_syslog.o
+  CC [M]  net/netfilter/xt_mark.o
+  CC [M]  net/netfilter/xt_nat.o
+  CC [M]  net/netfilter/xt_LOG.o
+  CC [M]  net/netfilter/xt_MASQUERADE.o
+  CC [M]  net/netfilter/xt_addrtype.o
+  CC [M]  lib/test_bpf.o
+  CC [M]  net/ipv4/netfilter/iptable_nat.o
+  CC [M]  drivers/thermal/intel/x86_pkg_temp_thermal.o
+  CC [M]  fs/efivarfs/inode.o
+  CC [M]  fs/efivarfs/file.o
+  CC [M]  fs/efivarfs/super.o
+  CC [M]  fs/efivarfs/vars.o
+  LD [M]  fs/efivarfs/efivarfs.o
+  MODPOST Module.symvers
+  CC [M]  fs/efivarfs/efivarfs.mod.o
+  CC [M]  .module-common.o
+  CC [M]  lib/test_bpf.mod.o
+  CC [M]  drivers/thermal/intel/x86_pkg_temp_thermal.mod.o
+  CC [M]  net/netfilter/nf_log_syslog.mod.o
+  CC [M]  net/netfilter/xt_mark.mod.o
+  CC [M]  net/netfilter/xt_nat.mod.o
+  CC [M]  net/netfilter/xt_LOG.mod.o
+  CC [M]  net/netfilter/xt_MASQUERADE.mod.o
+  CC [M]  net/netfilter/xt_addrtype.mod.o
+  CC [M]  net/ipv4/netfilter/iptable_nat.mod.o
+Kernel: arch/x86/boot/bzImage is ready  (#1)
+  LD [M]  net/netfilter/nf_log_syslog.ko
+  LD [M]  drivers/thermal/intel/x86_pkg_temp_thermal.ko
+  LD [M]  net/netfilter/xt_mark.ko
+  LD [M]  net/netfilter/xt_MASQUERADE.ko
+  LD [M]  lib/test_bpf.ko
+  LD [M]  net/ipv4/netfilter/iptable_nat.ko
+  LD [M]  net/netfilter/xt_LOG.ko
+  LD [M]  net/netfilter/xt_addrtype.ko
+  LD [M]  fs/efivarfs/efivarfs.ko
+  LD [M]  net/netfilter/xt_nat.ko
+make[1]: Leaving directory '/users/cs25m046/kernel-original/build'
+
+Build exit status: 0
+6.15.0-g680b721a3232
+7746f8512c02a78adaa320c334fb4995de8f2b91dca9947f8ddba201441ce6f8  build/arch/x86/boot/bzImage
+f30cd75d5466361396d753c6b23bd288dea24a3e158b7acd61a8bd12c43b6795  build/lib/test_bpf.ko

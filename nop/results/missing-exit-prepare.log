@@ -1,0 +1,16 @@
+Difference from the R0 preservation test:
+--- nop/keep-r0.c	2026-11-02 01:43:55.885732233 -0600
++++ nop/no-exit.c	2026-11-02 07:18:55.397487047 -0600
+@@ -13,7 +13,6 @@
+         { .code = BPF_ALU64 | BPF_MOV | BPF_K,
+           .dst_reg = BPF_REG_0, .imm = 7 },
+         { .code = NOP_CODE },
+-        { .code = BPF_JMP | BPF_EXIT },
+     };
+     char log[65536] = {0};
+     union bpf_attr attr = {0};
+Command: gcc -static -Wall -Wextra -O2 nop/no-exit.c -o /users/cs25m046/guest-original/no-exit
+67031066a4caaeb1d05a8aeb03db5e6028813fde507dddb8e4dcdfadeb1f616f  nop/no-exit.c
+37af1fa241cf88b0e491b3a1cbf6e328664111206c44ddcf8c51999edfda4720  /users/cs25m046/guest-original/no-exit
+9dc6080dc06ec16d3aaab8d503a096330ca60ac002e832b5588a88752d2da471  build/arch/x86/boot/bzImage
+9d182d80d4214d815ea0d5fac4b65011ed53a16f32e2802c225dc5b0166296a4  /users/cs25m046/guest-original/initramfs-no-exit.cpio.gz

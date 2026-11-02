@@ -1,0 +1,17 @@
+Difference from valid baseline test:
+--- nop/test.c	2026-11-02 00:09:56.501400835 -0600
++++ nop/bad-class.c	2026-11-02 04:21:14.065339925 -0600
+@@ -5,7 +5,7 @@
+ #include <sys/syscall.h>
+ #include <unistd.h>
+ 
+-#define NOP_CODE 0xe7
++#define NOP_CODE 0xe4
+ 
+ int main(void)
+ {
+Command: gcc -static -Wall -Wextra -O2 nop/bad-class.c -o /users/cs25m046/guest-original/bad-class
+e1f65257fc9c15224b2b94babe2e2a12ba6e92beef3dd36213a4e1090f61393d  nop/bad-class.c
+5756b84b8845335885addb93bef8908a01eff09d9ea02a706c9f066e5c876b38  /users/cs25m046/guest-original/bad-class
+9dc6080dc06ec16d3aaab8d503a096330ca60ac002e832b5588a88752d2da471  build/arch/x86/boot/bzImage
+15c2247b75caa685a187c1c4437a73b6a672cf02751fd0e5727f214500835fb6  /users/cs25m046/guest-original/initramfs-class.cpio.gz

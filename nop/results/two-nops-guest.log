@@ -1,0 +1,25 @@
+Script started on 2026-11-02 04:17:40-06:00 [COMMAND="bash nop/boot-two.sh" TERM="dumb" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
+c[?7l[2J[0mSeaBIOS (version 1.16.3-debian-1.16.3-2)
+Booting from ROM..c[?7l[2J[0m.Guest kernel: 6.15.0-gc9d2947cd680
+Run: uname -r
+Then: /test
+Then: echo $?
+To shut down: poweroff -f
+
+
+BusyBox v1.36.1 (Ubuntu 1:1.36.1-6ubuntu3.1) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+
+/bin/sh: can't access tty; job control turned off
+~ # [6nuname -r
+6.15.0-gc9d2947cd680
+~ # /two-nops
+Program loaded
+processed 4 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+Program returned 7
+~ # echo $?
+0
+~ # [6npoweroff -f
+[   48.298580] reboot: Power down
+
+Script done on 2026-11-02 04:18:29-06:00 [COMMAND_EXIT_CODE="0"]

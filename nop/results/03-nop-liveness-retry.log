@@ -1,0 +1,40 @@
+Retry: insert NOP liveness case using the function name as the anchor.
+diff --git a/kernel/bpf/verifier.c b/kernel/bpf/verifier.c
+index a93197910..7bde3d44c 100644
+--- a/kernel/bpf/verifier.c
++++ b/kernel/bpf/verifier.c
+@@ -23778,6 +23778,10 @@ static void compute_insn_live_regs(struct bpf_verifier_env *env,
+ 	case BPF_ALU:
+ 	case BPF_ALU64:
+ 		switch (code) {
++		case BPF_NOP:
++			use = 0;
++			def = 0;
++			break;
+ 		case BPF_END:
+ 			use = dst;
+ 			def = dst;
+ 23778		case BPF_ALU:
+ 23779		case BPF_ALU64:
+ 23780			switch (code) {
+ 23781			case BPF_NOP:
+ 23782				use = 0;
+ 23783				def = 0;
+ 23784				break;
+ 23785			case BPF_END:
+ 23786				use = dst;
+ 23787				def = dst;
+ 23788				break;
+ 23789			case BPF_MOV:
+ 23790				def = dst;
+ 23791				if (BPF_SRC(insn->code) == BPF_K)
+ 23792					use = 0;
+ 23793				else
+ 23794					use = src;
+ 23795				break;
+ 23796			default:
+ 23797				def = dst;
+ 23798				if (BPF_SRC(insn->code) == BPF_K)
+## nop
+ M kernel/bpf/verifier.c
+?? nop/

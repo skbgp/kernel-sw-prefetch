@@ -1,0 +1,28 @@
+Source commit: 680b721a3232f6d689a67c1ca37c6cf35fe1df6e
+Command: make O=build x86_64_defconfig
+make[1]: Entering directory '/users/cs25m046/kernel-original/build'
+  GEN     Makefile
+  HOSTCC  scripts/basic/fixdep
+  HOSTCC  scripts/kconfig/conf.o
+  HOSTCC  scripts/kconfig/confdata.o
+  HOSTCC  scripts/kconfig/expr.o
+  LEX     scripts/kconfig/lexer.lex.c
+  YACC    scripts/kconfig/parser.tab.[ch]
+  HOSTCC  scripts/kconfig/lexer.lex.o
+  HOSTCC  scripts/kconfig/menu.o
+  HOSTCC  scripts/kconfig/parser.tab.o
+  HOSTCC  scripts/kconfig/preprocess.o
+  HOSTCC  scripts/kconfig/symbol.o
+  HOSTCC  scripts/kconfig/util.o
+  HOSTLD  scripts/kconfig/conf
+#
+# configuration written to .config
+#
+make[1]: Leaving directory '/users/cs25m046/kernel-original/build'
+CONFIG_BPF_SYSCALL=n
+CONFIG_BPF_JIT=n
+CONFIG_BPF_JIT_ALWAYS_ON=undef
+CONFIG_XDP_BATCHING=n
+CONFIG_BLK_DEV_INITRD=y
+CONFIG_SERIAL_8250_CONSOLE=y
+## main...origin/main

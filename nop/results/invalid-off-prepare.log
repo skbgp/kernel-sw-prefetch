@@ -1,0 +1,17 @@
+Difference from valid test:
+--- nop/test.c	2026-11-02 00:09:56.501400835 -0600
++++ nop/bad-off.c	2026-11-02 01:39:01.410161059 -0600
+@@ -10,7 +10,7 @@
+ int main(void)
+ {
+     struct bpf_insn program[] = {
+-        { .code = NOP_CODE },
++        { .code = NOP_CODE, .off = 1 },
+         { .code = BPF_ALU64 | BPF_MOV | BPF_K,
+           .dst_reg = BPF_REG_0, .imm = 7 },
+         { .code = BPF_JMP | BPF_EXIT },
+Command: gcc -static -Wall -Wextra -O2 nop/bad-off.c -o /users/cs25m046/guest-original/bad-off
+9e2b510ae6ed3bc40618a26077200f7bfd2717f8ebf8df3f8c597865cea7a9ae  nop/bad-off.c
+d52e9334b2882e01a16f56139d5b5b87694d227184e2f817111ca05576808d79  /users/cs25m046/guest-original/bad-off
+9dc6080dc06ec16d3aaab8d503a096330ca60ac002e832b5588a88752d2da471  build/arch/x86/boot/bzImage
+b3a8c8de64fd8d58dcf2dbd06cc8adb7472d2a744d8d570afb51e2d62116cc3d  /users/cs25m046/guest-original/initramfs-off.cpio.gz

@@ -1,0 +1,29 @@
+ kernel/bpf/verifier.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+[nop 3a80b9b73] Add NOP checks
+ Committer: cs25m046 <cs25m046@node0.cs25m046-321505.heartbeat-pg0.wisc.cloudlab.us>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 9 insertions(+)
+commit 3a80b9b73fe984fb86135288a7e9c4f1d085bba9
+Author:     cs25m046 <cs25m046@node0.cs25m046-321505.heartbeat-pg0.wisc.cloudlab.us>
+AuthorDate: Mon Nov 2 00:46:11 2026 -0600
+Commit:     cs25m046 <cs25m046@node0.cs25m046-321505.heartbeat-pg0.wisc.cloudlab.us>
+CommitDate: Mon Nov 2 00:46:11 2026 -0600
+
+    Add NOP checks
+
+ kernel/bpf/verifier.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+## nop
+?? nop/

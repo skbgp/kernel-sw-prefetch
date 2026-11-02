@@ -1,0 +1,9 @@
+Mon Nov  2 06:10:23 UTC 2026
+Build host kernel: 6.8.0-147-generic
+Source commit: 680b721a3232f6d689a67c1ca37c6cf35fe1df6e
+Command: gcc -static -Wall -Wextra -O2 nop/test.c -o /tmp/nop-test
+Compilation exit status: 0
+/tmp/nop-test: ELF 64-bit LSB executable, x86-64, version 1 (GNU/Linux), statically linked, BuildID[sha1]=bf131362edfc9853e8abd530fdee8d6a7d1fbdb6, for GNU/Linux 3.2.0, not stripped
+9eae6ee8ff28395134879488bc0d6bf78b5ccba5385213a66d77dfd0aaeedab6  nop/test.c
+b0edd406902aa7bd60477848b6fbb5e230e13ce82c7775c8d36cf688447eeff5  /tmp/nop-test
+The test has not been executed.

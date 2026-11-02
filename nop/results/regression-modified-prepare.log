@@ -1,0 +1,4 @@
+9dc6080dc06ec16d3aaab8d503a096330ca60ac002e832b5588a88752d2da471  build/arch/x86/boot/bzImage
+9b21f618a3644f2af0e42831b5e2c81032007817c1b28fb379adc7bf057308b4  build/lib/test_bpf.ko
+5e3b1cd0caeee98d9334fcb3c0dd22a73190ddebc8fd8873d8ddc911f947bf7e  /users/cs25m046/guest-original/initramfs-regression-modified.cpio.gz
+Configurations match.

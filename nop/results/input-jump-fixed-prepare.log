@@ -1,0 +1,22 @@
+Change from the failed branch test:
+--- nop/jump-nop.c	2026-11-02 07:22:26.887927328 -0600
++++ nop/jump-nop-fixed.c	2026-11-02 08:15:05.146545787 -0600
+@@ -1,5 +1,6 @@
+ #define _GNU_SOURCE
+ #include <linux/bpf.h>
++#include <linux/if_ether.h>
+ #include <stdint.h>
+ #include <stddef.h>
+ #include <stdio.h>
+@@ -17,7 +18,7 @@
+         { .code = BPF_ALU64 | BPF_MOV | BPF_K,
+           .dst_reg = BPF_REG_0, .imm = 7 },
+         { .code = BPF_JMP | BPF_JEQ | BPF_K,
+-          .dst_reg = BPF_REG_2, .off = 1, .imm = 64 },
++          .dst_reg = BPF_REG_2, .off = 1, .imm = 64 - ETH_HLEN },
+         { .code = BPF_ALU64 | BPF_MOV | BPF_K,
+           .dst_reg = BPF_REG_0, .imm = 9 },
+         { .code = NOP_CODE },
+Command: gcc -static -Wall -Wextra -O2 nop/jump-nop-fixed.c -o /users/cs25m046/guest-original/jump-nop-fixed
+2b05ba46f0685e6ebdae54ec7cad95b3481c5368250f5c24cbeb5327319bb739  nop/jump-nop-fixed.c
+fafea7b8d5fd431a525b8ab090a0d0c399c98f97897c95533d7dc78a929cae2b  /users/cs25m046/guest-original/jump-nop-fixed

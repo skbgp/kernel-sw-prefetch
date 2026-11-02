@@ -1,0 +1,9 @@
+Input-dependent jump involving NOP
+
+The initial test compared __sk_buff.len with 64 for a 64-byte input buffer. It loaded, but returned 9 instead of 7 and exited 1. The second input was not run because the harness stops on the first mismatch.
+
+Source inspection found net/bpf/test_run.c:1052 calls eth_type_trans; net/ethernet/eth.c:164 calls eth_skb_pull_mac; include/linux/etherdevice.h:643 pulls ETH_HLEN bytes. ETH_HLEN is 14 in include/uapi/linux/if_ether.h:34. This socket-filter path therefore sees a length of 50 for the supplied 64-byte buffer.
+
+The corrected version compares against 64 - ETH_HLEN. The same loaded program returned 7 for a 64-byte input and 9 for a 32-byte input; exit status 0. Kernel code was unchanged. Both versions and their logs are preserved.
+
+This provides runtime evidence of input-dependent behavior through the submitted branch and NOP. Translated bytecode has not been retrieved to inspect its post-verification instruction layout.

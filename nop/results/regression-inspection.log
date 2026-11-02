@@ -1,0 +1,58 @@
+Regression test configuration definition:
+lib/Kconfig.debug:2587:config TEST_BPF
+lib/Kconfig.debug-2588-	tristate "Test BPF filter functionality"
+lib/Kconfig.debug-2589-	depends on m && NET
+lib/Kconfig.debug-2590-	help
+lib/Kconfig.debug-2591-	  This builds the "test_bpf" module that runs various test vectors
+lib/Kconfig.debug-2592-	  against the BPF interpreter or BPF JIT compiler depending on the
+lib/Kconfig.debug-2593-	  current setting. This is in particular useful for BPF JIT compiler
+lib/Kconfig.debug-2594-	  development, but also to run regression tests against changes in
+lib/Kconfig.debug-2595-	  the interpreter code. It also enables test stubs for eBPF maps and
+lib/Kconfig.debug-2596-	  verifier used by user space verifier testsuite.
+lib/Kconfig.debug-2597-
+lib/Kconfig.debug-2598-	  If unsure, say N.
+lib/Kconfig.debug-2599-
+lib/Kconfig.debug-2600-config FIND_BIT_BENCHMARK
+lib/Kconfig.debug-2601-	tristate "Test find_bit functions"
+lib/Kconfig.debug-2602-	help
+lib/Kconfig.debug-2603-	  This builds the "test_find_bit" module that measure find_*_bit()
+lib/Kconfig.debug-2604-	  functions performance.
+lib/Kconfig.debug-2605-
+lib/Kconfig.debug-2606-	  If unsure, say N.
+lib/Kconfig.debug-2607-
+lib/Kconfig.debug-2608-config TEST_FIRMWARE
+lib/Kconfig.debug-2609-	tristate "Test firmware loading via userspace interface"
+Regression module build rule:
+lib/Makefile:65:obj-$(CONFIG_TEST_BPF) += test_bpf.o
+Current configurations:
+kernel-original
+CONFIG_MODULES=y
+CONFIG_MODULE_UNLOAD=y
+CONFIG_TEST_BPF=n
+CONFIG_BPF_JIT=n
+kernel-sw-prefetch
+CONFIG_MODULES=y
+CONFIG_MODULE_UNLOAD=y
+CONFIG_TEST_BPF=n
+CONFIG_BPF_JIT=n
+Test module entry and options:
+lib/test_bpf.c:14987:module_param_string(test_name, test_name, sizeof(test_name), 0);
+lib/test_bpf.c:14990:module_param(test_id, int, 0);
+lib/test_bpf.c:14993:module_param_array(test_range, int, NULL, 0);
+lib/test_bpf.c:15137:static __init int test_skb_segment_single(const struct skb_segment_test *test)
+lib/test_bpf.c:15158:static __init int test_skb_segment(void)
+lib/test_bpf.c:15171:		if (test_skb_segment_single(test)) {
+lib/test_bpf.c:15575:static __init int test_tail_calls(struct bpf_array *progs)
+lib/test_bpf.c:15624:module_param_string(test_suite, test_suite, sizeof(test_suite), 0);
+lib/test_bpf.c:15637:	if (!strcmp(test_suite, "test_tail_calls")) {
+lib/test_bpf.c:15644:	if (!strcmp(test_suite, "test_skb_segment")) {
+lib/test_bpf.c:15660:	else if (!strcmp(test_suite, "test_tail_calls"))
+lib/test_bpf.c:15662:	else if (!strcmp(test_suite, "test_skb_segment"))
+lib/test_bpf.c:15713:static int __init test_bpf_init(void)
+lib/test_bpf.c:15720:	    strcmp(test_suite, "test_tail_calls") &&
+lib/test_bpf.c:15721:	    strcmp(test_suite, "test_skb_segment")) {
+lib/test_bpf.c:15747:	if (!strlen(test_suite) || !strcmp(test_suite, "test_tail_calls")) {
+lib/test_bpf.c:15751:		ret = test_tail_calls(progs);
+lib/test_bpf.c:15757:	if (!strlen(test_suite) || !strcmp(test_suite, "test_skb_segment"))
+lib/test_bpf.c:15758:		return test_skb_segment();
+lib/test_bpf.c:15767:module_init(test_bpf_init);

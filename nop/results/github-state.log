@@ -1,0 +1,12 @@
+Source revision: c9d2947cd6804952cb55e8e9a2797efee2a71f77
+Local commits:
+c9d2947cd Print NOP in logs
+5a80b333f Add NOP interpreter support
+dd6156657 Set NOP register usage
+3a80b9b73 Add NOP checks
+b2d3e13e5 Define NOP
+Working tree:
+## nop
+?? nop/
+GitHub branch heads:
+680b721a3232f6d689a67c1ca37c6cf35fe1df6e	refs/heads/main

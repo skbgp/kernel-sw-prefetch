@@ -1,0 +1,17 @@
+Guest filesystem prepared. QEMU has not been started.
+45cb8264e2122894ac23fa15aead3a66fb789c5b8e4e301421fe91e42dd58571  guest-original/init
+b0edd406902aa7bd60477848b6fbb5e230e13ce82c7775c8d36cf688447eeff5  guest-original/test
+ddc0d4dd894c97e5789fff54ef7052febfaf818fd526629552412950ceed17f9  guest-original/initramfs.cpio.gz
+Archive contents:
+5756 blocks
+bin
+dev
+proc
+sys
+tmp
+dev/console
+dev/null
+bin/busybox
+bin/sh
+init
+test

@@ -1,0 +1,17 @@
+Difference from valid baseline test:
+--- nop/test.c	2026-11-02 00:09:56.501400835 -0600
++++ nop/no-r0.c	2026-11-02 03:52:49.876063460 -0600
+@@ -11,8 +11,6 @@
+ {
+     struct bpf_insn program[] = {
+         { .code = NOP_CODE },
+-        { .code = BPF_ALU64 | BPF_MOV | BPF_K,
+-          .dst_reg = BPF_REG_0, .imm = 7 },
+         { .code = BPF_JMP | BPF_EXIT },
+     };
+     char log[65536] = {0};
+Command: gcc -static -Wall -Wextra -O2 nop/no-r0.c -o /users/cs25m046/guest-original/no-r0
+9cb1efe1d48d81cefdf2b164e04bf8b477bbdcf76898c08d855f986741b0f1b2  nop/no-r0.c
+6d0be494d517230f526120affd95ef19b6275d1b68f4f75556b54d9fbef914dd  /users/cs25m046/guest-original/no-r0
+9dc6080dc06ec16d3aaab8d503a096330ca60ac002e832b5588a88752d2da471  build/arch/x86/boot/bzImage
+ce43ca670fb104e345321c43d16fd6ea1565990f72689885cc2e6a97662c64af  /users/cs25m046/guest-original/initramfs-no-r0.cpio.gz

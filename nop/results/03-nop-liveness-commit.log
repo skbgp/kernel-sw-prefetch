@@ -1,0 +1,42 @@
+diff --git a/kernel/bpf/verifier.c b/kernel/bpf/verifier.c
+index a93197910..7bde3d44c 100644
+--- a/kernel/bpf/verifier.c
++++ b/kernel/bpf/verifier.c
+@@ -23778,6 +23778,10 @@ static void compute_insn_live_regs(struct bpf_verifier_env *env,
+ 	case BPF_ALU:
+ 	case BPF_ALU64:
+ 		switch (code) {
++		case BPF_NOP:
++			use = 0;
++			def = 0;
++			break;
+ 		case BPF_END:
+ 			use = dst;
+ 			def = dst;
+[nop dd6156657] Set NOP register usage
+ Committer: cs25m046 <cs25m046@node0.cs25m046-321505.heartbeat-pg0.wisc.cloudlab.us>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 4 insertions(+)
+commit dd6156657fec047b0436e1c473d10b5d615292b5
+Author:     cs25m046 <cs25m046@node0.cs25m046-321505.heartbeat-pg0.wisc.cloudlab.us>
+AuthorDate: Mon Nov 2 00:51:46 2026 -0600
+Commit:     cs25m046 <cs25m046@node0.cs25m046-321505.heartbeat-pg0.wisc.cloudlab.us>
+CommitDate: Mon Nov 2 00:51:46 2026 -0600
+
+    Set NOP register usage
+
+ kernel/bpf/verifier.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+## nop
+?? nop/

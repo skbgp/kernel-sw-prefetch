@@ -1,0 +1,29 @@
+Edit: kernel/bpf/core.c; add NOP to the shared instruction map and add its interpreter label.
+diff --git a/kernel/bpf/core.c b/kernel/bpf/core.c
+index ba6b6118c..198179ca5 100644
+--- a/kernel/bpf/core.c
++++ b/kernel/bpf/core.c
+@@ -1607,6 +1607,7 @@ EXPORT_SYMBOL_GPL(__bpf_call_base);
+ 	INSN_3(ALU64, ARSH, K),			\
+ 	INSN_3(ALU64, DIV,  K),			\
+ 	INSN_3(ALU64, MOD,  K),			\
++	INSN_3(ALU64, NOP,  K),			\
+ 	/* Call instruction. */			\
+ 	INSN_2(JMP, CALL),			\
+ 	/* Exit instruction. */			\
+@@ -1843,6 +1844,8 @@ static u64 ___bpf_prog_run(u64 *regs, const struct bpf_insn *insn)
+ 	ALU64_MOV_K:
+ 		DST = IMM;
+ 		CONT;
++	ALU64_NOP_K:
++		CONT;
+ 	LD_IMM_DW:
+ 		DST = (u64) (u32) insn[0].imm | ((u64) (u32) insn[1].imm) << 32;
+ 		insn++;
+kernel/bpf/core.c:1610:	INSN_3(ALU64, NOP,  K),			\
+kernel/bpf/core.c:1751:#define CONT	 ({ insn++; goto select_insn; })
+kernel/bpf/core.c:1752:#define CONT_JMP ({ insn++; goto select_insn; })
+kernel/bpf/core.c:1847:	ALU64_NOP_K:
+## nop
+ M kernel/bpf/core.c
+?? nop/

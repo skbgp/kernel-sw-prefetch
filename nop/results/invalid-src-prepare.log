@@ -1,0 +1,17 @@
+Difference from the valid test:
+--- nop/test.c	2026-11-02 00:09:56.501400835 -0600
++++ nop/bad-src.c	2026-11-02 01:16:02.097401517 -0600
+@@ -10,7 +10,7 @@
+ int main(void)
+ {
+     struct bpf_insn program[] = {
+-        { .code = NOP_CODE },
++        { .code = NOP_CODE, .src_reg = 1 },
+         { .code = BPF_ALU64 | BPF_MOV | BPF_K,
+           .dst_reg = BPF_REG_0, .imm = 7 },
+         { .code = BPF_JMP | BPF_EXIT },
+Command: gcc -static -Wall -Wextra -O2 nop/bad-src.c -o /users/cs25m046/guest-original/bad-src
+9257185c36c3fbcb682f31c381cbc93b7c1a0e810e9bd7cf18fbd639fbbf4b10  nop/bad-src.c
+4fa5b27af07daef4e82e5eb2c63023d51a7491290a1e3ed62cf6f83bc1be198f  /users/cs25m046/guest-original/bad-src
+9dc6080dc06ec16d3aaab8d503a096330ca60ac002e832b5588a88752d2da471  build/arch/x86/boot/bzImage
+f797c56066f77caf41eded752227d5d812f9d953c6c5580f7ee08f8c837f1e39  /users/cs25m046/guest-original/initramfs-src.cpio.gz

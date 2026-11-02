@@ -1,0 +1,23 @@
+Repository: kernel-original
+Command: scripts/config --file build/.config -m TEST_BPF
+Command: make O=build olddefconfig
+make[1]: Entering directory '/users/cs25m046/kernel-original/build'
+  GEN     Makefile
+#
+# No change to .config
+#
+make[1]: Leaving directory '/users/cs25m046/kernel-original/build'
+ TEST_BPF n -> m
+a89f8accb2eeee457ddfce29fcd1a718113d48b57ba9f753fcb61ef1c39f9cb2  build/.config
+Repository: kernel-sw-prefetch
+Command: scripts/config --file build/.config -m TEST_BPF
+Command: make O=build olddefconfig
+make[1]: Entering directory '/users/cs25m046/kernel-sw-prefetch/build'
+  GEN     Makefile
+#
+# No change to .config
+#
+make[1]: Leaving directory '/users/cs25m046/kernel-sw-prefetch/build'
+ TEST_BPF n -> m
+a89f8accb2eeee457ddfce29fcd1a718113d48b57ba9f753fcb61ef1c39f9cb2  build/.config
+Both regression configurations match byte for byte.

@@ -1,0 +1,45 @@
+Edit: kernel/bpf/verifier.c; add a NOP case at the start of check_alu_op.
+Command: git diff --check
+diff --git a/kernel/bpf/verifier.c b/kernel/bpf/verifier.c
+index b3f87b0ec..a93197910 100644
+--- a/kernel/bpf/verifier.c
++++ b/kernel/bpf/verifier.c
+@@ -15328,6 +15328,15 @@ static int check_alu_op(struct bpf_verifier_env *env, struct bpf_insn *insn)
+ 	u8 opcode = BPF_OP(insn->code);
+ 	int err;
+ 
++	if (opcode == BPF_NOP) {
++		if (insn->code != (BPF_ALU64 | BPF_NOP | BPF_K) ||
++		    insn->dst_reg || insn->src_reg || insn->off || insn->imm) {
++			verbose(env, "BPF_NOP uses reserved fields\n");
++			return -EINVAL;
++		}
++		return 0;
++	}
++
+ 	if (opcode == BPF_END || opcode == BPF_NEG) {
+ 		if (opcode == BPF_NEG) {
+ 			if (BPF_SRC(insn->code) != BPF_K ||
+ 15325	static int check_alu_op(struct bpf_verifier_env *env, struct bpf_insn *insn)
+ 15326	{
+ 15327		struct bpf_reg_state *regs = cur_regs(env);
+ 15328		u8 opcode = BPF_OP(insn->code);
+ 15329		int err;
+ 15330	
+ 15331		if (opcode == BPF_NOP) {
+ 15332			if (insn->code != (BPF_ALU64 | BPF_NOP | BPF_K) ||
+ 15333			    insn->dst_reg || insn->src_reg || insn->off || insn->imm) {
+ 15334				verbose(env, "BPF_NOP uses reserved fields\n");
+ 15335				return -EINVAL;
+ 15336			}
+ 15337			return 0;
+ 15338		}
+ 15339	
+ 15340		if (opcode == BPF_END || opcode == BPF_NEG) {
+ 15341			if (opcode == BPF_NEG) {
+ 15342				if (BPF_SRC(insn->code) != BPF_K ||
+ 15343				    insn->src_reg != BPF_REG_0 ||
+ 15344				    insn->off != 0 || insn->imm != 0) {
+## nop
+ M kernel/bpf/verifier.c
+?? nop/

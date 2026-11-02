@@ -1,0 +1,13 @@
+Extract from regression-original-guest.log on kernel 6.15.0-g680b721a3232. Full raw transcript is preserved separately.
+
+~ # dmesg | grep Summary
+[   44.223732] test_bpf: Summary: 1053 PASSED, 0 FAILED, [0/1041 JIT'ed]
+[   44.311216] test_bpf: test_tail_calls: Summary: 10 PASSED, 0 FAILED, [0/10 JIT'ed]
+[   44.311269] test_bpf: test_skb_segment: Summary: 2 PASSED, 0 FAILED
+~ # rmmod test_bpf
+~ # echo $?
+0
+~ # poweroff -f
+[  119.060254] reboot: Power down
+
+Script done on 2026-11-02 09:12:41-06:00 [COMMAND_EXIT_CODE="0"]

@@ -1,0 +1,16 @@
+Difference from R0 preservation test:
+--- nop/keep-r0.c	2026-11-02 01:43:55.885732233 -0600
++++ nop/two-nops.c	2026-11-02 04:17:17.879531226 -0600
+@@ -13,6 +13,7 @@
+         { .code = BPF_ALU64 | BPF_MOV | BPF_K,
+           .dst_reg = BPF_REG_0, .imm = 7 },
+         { .code = NOP_CODE },
++        { .code = NOP_CODE },
+         { .code = BPF_JMP | BPF_EXIT },
+     };
+     char log[65536] = {0};
+Command: gcc -static -Wall -Wextra -O2 nop/two-nops.c -o /users/cs25m046/guest-original/two-nops
+0f3e65bf341efd651398fa53cb1137d1623381eff0f739167fbdc8ac36414606  nop/two-nops.c
+3b3e2c15a7b83e965bd910d955760b4df5e0ea359b15f9aee2460e9f65ead615  /users/cs25m046/guest-original/two-nops
+9dc6080dc06ec16d3aaab8d503a096330ca60ac002e832b5588a88752d2da471  build/arch/x86/boot/bzImage
+8a49498afdf66aff180a7a7b15f5f06f7604e88e57a6a2f15a9d7fb692b923a2  /users/cs25m046/guest-original/initramfs-two.cpio.gz

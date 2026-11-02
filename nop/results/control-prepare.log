@@ -1,0 +1,22 @@
+Difference from NOP test:
+--- nop/test.c	2026-11-02 00:09:56.501400835 -0600
++++ nop/control.c	2026-11-02 07:02:53.916361945 -0600
+@@ -5,12 +5,9 @@
+ #include <sys/syscall.h>
+ #include <unistd.h>
+ 
+-#define NOP_CODE 0xe7
+-
+ int main(void)
+ {
+     struct bpf_insn program[] = {
+-        { .code = NOP_CODE },
+         { .code = BPF_ALU64 | BPF_MOV | BPF_K,
+           .dst_reg = BPF_REG_0, .imm = 7 },
+         { .code = BPF_JMP | BPF_EXIT },
+Command: gcc -static -Wall -Wextra -O2 nop/control.c -o /users/cs25m046/guest-original/control
+6a41e40323a89bce7367997690b26dfa44fe1ed0aace1e89e1d5df8f1b080548  nop/control.c
+3f12925ead980b0f7fa93e8e8e515f4f4161b8f5fb81c335d2b43ec99c923eac  /users/cs25m046/guest-original/control
+00d922c83e617fba9df64b58da73cf05fa465d8cd114866e0cc1937b609807c3  /users/cs25m046/guest-original/initramfs-control.cpio.gz
+7746f8512c02a78adaa320c334fb4995de8f2b91dca9947f8ddba201441ce6f8  ../kernel-original/build/arch/x86/boot/bzImage
+9dc6080dc06ec16d3aaab8d503a096330ca60ac002e832b5588a88752d2da471  build/arch/x86/boot/bzImage

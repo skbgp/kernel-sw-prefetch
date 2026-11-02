@@ -1,0 +1,17 @@
+Difference from valid baseline test:
+--- nop/test.c	2026-11-02 00:09:56.501400835 -0600
++++ nop/bad-negative-off.c	2026-11-02 07:06:30.485845946 -0600
+@@ -10,7 +10,7 @@
+ int main(void)
+ {
+     struct bpf_insn program[] = {
+-        { .code = NOP_CODE },
++        { .code = NOP_CODE, .off = -1 },
+         { .code = BPF_ALU64 | BPF_MOV | BPF_K,
+           .dst_reg = BPF_REG_0, .imm = 7 },
+         { .code = BPF_JMP | BPF_EXIT },
+Command: gcc -static -Wall -Wextra -O2 nop/bad-negative-off.c -o /users/cs25m046/guest-original/bad-negative-off
+59f16c1b8e67ca0419755d1658f85d0339ebfceb45b5e1de4fa86abb21fce429  nop/bad-negative-off.c
+9e16476305ccff192728a6ad67573a9646f83bb23451fbdab858f746b2b5bfde  /users/cs25m046/guest-original/bad-negative-off
+9dc6080dc06ec16d3aaab8d503a096330ca60ac002e832b5588a88752d2da471  build/arch/x86/boot/bzImage
+da1a45dfc673517523c4dbcf3f5cc65b24025dc674a08a17176226357d20bb76  /users/cs25m046/guest-original/initramfs-negative-off.cpio.gz

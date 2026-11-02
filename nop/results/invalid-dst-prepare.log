@@ -1,0 +1,18 @@
+Difference from the valid test:
+--- nop/test.c	2026-11-02 00:09:56.501400835 -0600
++++ nop/bad-dst.c	2026-11-02 01:13:30.096552840 -0600
+@@ -10,7 +10,7 @@
+ int main(void)
+ {
+     struct bpf_insn program[] = {
+-        { .code = NOP_CODE },
++        { .code = NOP_CODE, .dst_reg = 1 },
+         { .code = BPF_ALU64 | BPF_MOV | BPF_K,
+           .dst_reg = BPF_REG_0, .imm = 7 },
+         { .code = BPF_JMP | BPF_EXIT },
+Command: gcc -static -Wall -Wextra -O2 nop/bad-dst.c -o /users/cs25m046/guest-original/bad-dst
+221942949fa19bac958216742478f5abe52c0862dcc47709702396fc501c450f  nop/bad-dst.c
+fdedad990b3968231e8a87c46bff514e9c8e768909fdbc5644673c47b6b47683  /users/cs25m046/guest-original/bad-dst
+Modified kernel and test guest hashes:
+9dc6080dc06ec16d3aaab8d503a096330ca60ac002e832b5588a88752d2da471  build/arch/x86/boot/bzImage
+1f4fdfd547e58d67e7939f2aa441b9a9811bf6d67bb03fd7e65f0a1653b4562a  /users/cs25m046/guest-original/initramfs-dst.cpio.gz

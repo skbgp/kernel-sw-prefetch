@@ -1,0 +1,26 @@
+Command: scripts/config --file build/.config -e XDP_BATCHING
+Command: make O=build olddefconfig
+make[1]: Entering directory '/users/cs25m046/kernel-original/build'
+  GEN     Makefile
+#
+# No change to .config
+#
+make[1]: Leaving directory '/users/cs25m046/kernel-original/build'
+Changes from the configuration used in the failed build:
+ XDP_BATCHING n -> y
+Changes from the original default configuration:
+ BPF_SYSCALL n -> y
+ XDP_BATCHING n -> y
++BPF_EVENTS y
++BPF_PRELOAD n
++BPF_UNPRIV_DEFAULT_OFF y
++CGROUP_BPF n
++IO_URING_ZCRX y
++NETFILTER_BPF_LINK y
++NETKIT n
++NET_DEVMEM y
++NET_SOCK_MSG y
++PAGE_POOL y
++PAGE_POOL_STATS n
++XDP_SOCKETS n
+## main...origin/main

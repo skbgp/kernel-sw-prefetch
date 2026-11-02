@@ -1,0 +1,10 @@
+commit b2d3e13e57c3a752875f867bd9356ddf263872cb
+Author:     cs25m046 <cs25m046@node0.cs25m046-321505.heartbeat-pg0.wisc.cloudlab.us>
+AuthorDate: Mon Nov 2 00:43:10 2026 -0600
+Commit:     cs25m046 <cs25m046@node0.cs25m046-321505.heartbeat-pg0.wisc.cloudlab.us>
+CommitDate: Mon Nov 2 00:43:10 2026 -0600
+
+    Define NOP
+
+ include/uapi/linux/bpf.h | 3 +++
+ 1 file changed, 3 insertions(+)

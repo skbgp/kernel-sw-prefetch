@@ -1,0 +1,22 @@
+Difference from valid baseline test:
+--- nop/test.c	2026-11-02 00:09:56.501400835 -0600
++++ nop/keep-r2.c	2026-11-02 03:55:42.380116192 -0600
+@@ -10,9 +10,11 @@
+ int main(void)
+ {
+     struct bpf_insn program[] = {
+-        { .code = NOP_CODE },
+         { .code = BPF_ALU64 | BPF_MOV | BPF_K,
+-          .dst_reg = BPF_REG_0, .imm = 7 },
++          .dst_reg = BPF_REG_2, .imm = 7 },
++        { .code = NOP_CODE },
++        { .code = BPF_ALU64 | BPF_MOV | BPF_X,
++          .dst_reg = BPF_REG_0, .src_reg = BPF_REG_2 },
+         { .code = BPF_JMP | BPF_EXIT },
+     };
+     char log[65536] = {0};
+Command: gcc -static -Wall -Wextra -O2 nop/keep-r2.c -o /users/cs25m046/guest-original/keep-r2
+d18566cca1b09ee83e724a12711298f912ff8a1687a7bbd60363ec0a8c9a538f  nop/keep-r2.c
+05c592c96e5269639906dad940feb27f6f7fed09ad710a36227402512a1c728b  /users/cs25m046/guest-original/keep-r2
+9dc6080dc06ec16d3aaab8d503a096330ca60ac002e832b5588a88752d2da471  build/arch/x86/boot/bzImage
+0191ce80049ed69933add013f3f809245b56e7f56c3eb89cca2ae1f5bb23f013  /users/cs25m046/guest-original/initramfs-r2.cpio.gz
