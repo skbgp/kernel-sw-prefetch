@@ -191,7 +191,9 @@ void print_bpf_insn(const struct bpf_insn_cbs *cbs,
 	u8 class = BPF_CLASS(insn->code);
 
 	if (class == BPF_ALU || class == BPF_ALU64) {
-		if (BPF_OP(insn->code) == BPF_END) {
+		if (insn->code == (BPF_ALU64 | BPF_NOP | BPF_K)) {
+			verbose(cbs->private_data, "(%02x) nop\n", insn->code);
+		} else if (BPF_OP(insn->code) == BPF_END) {
 			if (class == BPF_ALU64)
 				print_bpf_bswap_insn(verbose, cbs->private_data, insn);
 			else
