@@ -23778,6 +23778,10 @@ static void compute_insn_live_regs(struct bpf_verifier_env *env,
 	case BPF_ALU:
 	case BPF_ALU64:
 		switch (code) {
+		case BPF_NOP:
+			use = 0;
+			def = 0;
+			break;
 		case BPF_END:
 			use = dst;
 			def = dst;
