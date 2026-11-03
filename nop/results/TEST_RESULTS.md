@@ -44,4 +44,10 @@ The E4 and EF cases fail opcode recognition. Nonzero operand fields in E7 reach 
 
 Further coverage can include register-field boundaries and inspection of translated bytecode for the input-dependent jump test, and further control-flow cases. Existing test_bpf regression suites have now passed on both kernels; see REGRESSION_RESULTS.md.
 
-The full source and raw logs are included in this branch. The separate LaTeX report is not part of this upload.
+The [original sources and boot scripts](https://github.com/skbgp/kernel-sw-prefetch/tree/8304da5f0a3b947da236a454c3ad78554fb7ea17/nop) match these 21 recorded runs.
+
+## Consolidated checker
+
+`check.c` now groups 17 cases from those sources. It checks the expected verifier message for rejected programs and the return value for accepted programs. The corrected branch runs with both input sizes. The first, incorrect branch test is available in the original commit above.
+
+The new [modified-kernel log](nop-cleanup-modified.log) records `/test` returning 7 and `/check` reporting `17 cases, 0 failures`, both with exit status 0. The [original-kernel log](nop-cleanup-original.log) records the basic E7 rejection. On that kernel `/check` reports 13 failures and exits 1 because it expects the NOP implementation. These two sessions use the existing kernel images.

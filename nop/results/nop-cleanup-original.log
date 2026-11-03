@@ -1,0 +1,77 @@
+Script started on 2026-11-02 22:16:07-06:00 [COMMAND="sudo -n sh nop/boot.sh /users/cs25m046/kernel-original/build/arch/x86/boot/bzImage /tmp/nop-cleanup.WYQq3bEd/guest/initramfs.cpio.gz" TERM="dumb" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
+c[?7l[2J[0mSeaBIOS (version 1.16.3-debian-1.16.3-2)
+Booting from ROM..c[?7l[2J[0m.Guest kernel: 6.15.0-g680b721a3232
+Run /test, then /check. Run poweroff -f to shut down.
+
+
+BusyBox v1.36.1 (Ubuntu 1:1.36.1-6ubuntu3.1) built-in shell (ash)
+Enter 'help' for a list of built-in commands.
+
+/bin/sh: can't access tty; job control turned off
+~ # [6nuname -r
+6.15.0-g680b721a3232
+~ # /test
+Load failed: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+~ # echo $?
+1
+~ # /check
+PASS class: rejected as expected
+unknown opcode e4
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+PASS source form: rejected as expected
+unknown opcode ef
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+FAIL destination: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+FAIL source register: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+FAIL positive offset: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+FAIL negative offset: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+FAIL positive immediate: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+FAIL negative immediate: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+FAIL uninitialised R0: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+FAIL uninitialised R2: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+PASS missing exit: rejected as expected
+last insn is not an exit or jmp
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+Loaded control
+processed 2 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+PASS control: length 64 returned 7
+FAIL preserve R0: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+FAIL preserve R2: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+FAIL preserve stack: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+FAIL two NOPs: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+FAIL input length: Invalid argument
+unknown opcode e7
+processed 0 insns (limit 10000000) max_states_per_insn 0 total_states 0 peak_states 0 mark_read 0
+17 cases, 13 failures
+~ # echo $?
+1
+~ # poweroff -f
+[   32.487247] reboot: Power down
+
+Script done on 2026-11-02 22:16:40-06:00 [COMMAND_EXIT_CODE="0"]

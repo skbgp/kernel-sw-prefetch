@@ -1,0 +1,10 @@
+Command: cc -static -Wall -Wextra -Werror -O2 nop/check.c -o check
+Command: sh nop/prepare-guest.sh /users/cs25m046/kernel-sw-prefetch/build /tmp/nop-cleanup.WYQq3bEd/guest-final
+Guest ready: /tmp/nop-cleanup.WYQq3bEd/guest-final/initramfs.cpio.gz
+The final script produces the same test binaries used in the two QEMU sessions.
+9eae6ee8ff28395134879488bc0d6bf78b5ccba5385213a66d77dfd0aaeedab6  nop/test.c
+623dbccabd68e22d4e95cb79126204d17d92cf2c34227697cfebf8238c467ea0  nop/check.c
+1b9d21d1eaf2f7cf65c895eacb8a41fc9b9deac3709ac963839f379ebc584caa  nop/boot.sh
+5569ff472b33b2c4e3581a42402a8d7eeb7820e499a49acbf65f7e8317d61cef  nop/prepare-guest.sh
+b0edd406902aa7bd60477848b6fbb5e230e13ce82c7775c8d36cf688447eeff5  guest-final/test
+10cdd384c654bab8506f48d68fa6a7824e06f920838c64f9372484d064e405ca  guest-final/check
