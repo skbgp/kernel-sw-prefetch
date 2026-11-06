@@ -15328,6 +15328,16 @@ static int check_alu_op(struct bpf_verifier_env *env, struct bpf_insn *insn)
 	u8 opcode = BPF_OP(insn->code);
 	int err;
 
+	if (opcode == BPF_NOP) {
+		/* Accept only 0xe7 with all unused fields set to zero. */
+		if (insn->code != (BPF_ALU64 | BPF_NOP | BPF_K) ||
+		    insn->dst_reg || insn->src_reg || insn->off || insn->imm) {
+			verbose(env, "BPF_NOP uses reserved fields\n");
+			return -EINVAL;
+		}
+		return 0;
+	}
+
 	if (opcode == BPF_END || opcode == BPF_NEG) {
 		if (opcode == BPF_NEG) {
 			if (BPF_SRC(insn->code) != BPF_K ||
@@ -23769,6 +23779,11 @@ static void compute_insn_live_regs(struct bpf_verifier_env *env,
 	case BPF_ALU:
 	case BPF_ALU64:
 		switch (code) {
+		case BPF_NOP:
+			/* NOP does not read or write registers. */
+			use = 0;
+			def = 0;
+			break;
 		case BPF_END:
 			use = dst;
 			def = dst;

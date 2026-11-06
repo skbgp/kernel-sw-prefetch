@@ -1607,6 +1607,8 @@ EXPORT_SYMBOL_GPL(__bpf_call_base);
 	INSN_3(ALU64, ARSH, K),			\
 	INSN_3(ALU64, DIV,  K),			\
 	INSN_3(ALU64, MOD,  K),			\
+	/* Add NOP to the shared opcode table. */		\
+	INSN_3(ALU64, NOP,  K),			\
 	/* Call instruction. */			\
 	INSN_2(JMP, CALL),			\
 	/* Exit instruction. */			\
@@ -1842,6 +1844,9 @@ select_insn:
 		CONT;
 	ALU64_MOV_K:
 		DST = IMM;
+		CONT;
+	ALU64_NOP_K:
+		/* Only move to the next instruction. */
 		CONT;
 	LD_IMM_DW:
 		DST = (u64) (u32) insn[0].imm | ((u64) (u32) insn[1].imm) << 32;
